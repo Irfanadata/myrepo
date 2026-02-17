@@ -1,0 +1,13 @@
+config {
+  type: "incremental",
+  schema: "mydataset",
+  name: "target_orders_table",
+  uniqueKey: ["order_id"] 
+}
+
+select
+  order_id,
+  customer_id,
+  amount+1000 as tot,
+  order_date
+from raw.orders
