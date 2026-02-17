@@ -3,11 +3,10 @@ config {
   dependencies: ["orders_table"]
 }
 
-insert into ${ref("orders_table")}
+-- Log row count of orders_table
+insert into audit.table_load_log
 select
-  order_id,
-  customer_id,
-  amount,
-  order_date,
-  current_timestamp()
-from `raw.orders`
+  'orders_table' as table_name,
+  count(*) as row_count,
+  current_timestamp() as load_time
+from ${ref("orders_table")};
