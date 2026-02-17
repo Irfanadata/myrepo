@@ -1,0 +1,13 @@
+config {
+  type: "operations",
+  dependencies: ["orders_table"]
+}
+
+insert into ${ref("orders_table")}
+select
+  order_id,
+  customer_id,
+  amount,
+  order_date,
+  current_timestamp()
+from `raw.orders`

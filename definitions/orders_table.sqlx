@@ -1,0 +1,15 @@
+config {
+  type: "table"
+}
+
+select
+  cast(null as int64) as order_id,
+  cast(null as int64) as customer_id,
+  cast(null as numeric) as amount,
+  cast(null as date) as order_date,
+  cast(null as timestamp) as created_at
+from (select 1)
+where false
+
+
+
