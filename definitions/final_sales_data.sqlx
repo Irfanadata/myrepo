@@ -1,0 +1,41 @@
+config {
+  type: "table",
+  schema: "analytics",
+  name: "final_sales_data"
+}
+
+
+pre_operations {
+  CREATE OR REPLACE TEMP TABLE tmp_sales AS
+  SELECT
+    order_id,
+    total_price,
+    order_date
+  FROM raw_dataset.raw_sales_data
+}
+
+
+SELECT
+  order_id,
+  total_price
+FROM
+  tmp_sales
+WHERE
+  order_date > CURRENT_DATE() - INTERVAL 30 DAY
+
+
+post_operations {
+  INSERT INTO `audit_dataset.dataform_audit_log`
+  (
+    table_name,
+    run_date,
+    row_count,
+    run_timestamp
+  )
+  SELECT
+    "final_sales_data",
+    CURRENT_DATE(),
+    COUNT(*),
+    CURRENT_TIMESTAMP()
+  FROM ${self()};
+}
