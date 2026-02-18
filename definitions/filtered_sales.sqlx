@@ -1,0 +1,19 @@
+config {
+  type: "table",
+  schema: "analytics",
+  name: "final_sales_data_v2"
+}
+
+
+js {
+  const { sales_category } = require("../includes/case_logic");
+  const { filter_recent_high_orders } = require("../includes/order_filters");
+}
+
+SELECT
+  order_id,
+  total_price,
+  order_date,
+  ${sales_category("total_price")} AS sales_category
+FROM raw_dataset.raw_sales_data
+${filter_recent_high_orders()}
