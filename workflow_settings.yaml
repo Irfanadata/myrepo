@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 defaultProject: bilvantisaimlproject
 defaultDataset: dataform
 defaultAssertionDataset: dataform_assertions
 dataformCoreVersion: 3.0.42
+=======
+defaultProject: ourproject-486611
+defaultDataset: dataform
+defaultAssertionDataset: dataform_assertions
+dataformCoreVersion: 3.0.37
+>>>>>>> refs/heads/main

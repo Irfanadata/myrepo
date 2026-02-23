@@ -1,0 +1,12 @@
+config {
+  type: "operations",
+  dependencies: ["orders_table"]
+}
+
+-- Log row count of orders_table
+insert into audit.table_load_log
+select
+  'orders_table' as table_name,
+  count(*) as row_count,
+  current_timestamp() as load_time
+from ${ref("orders_table")};

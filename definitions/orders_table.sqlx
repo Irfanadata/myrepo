@@ -1,0 +1,15 @@
+config {
+  type: "table",
+  dependencies: ["cleanup_raw_orders"]
+}
+
+-- Load data from raw table and apply discount inline
+select
+  order_id,
+  customer_id,
+  amount * 0.9 as discounted_amount,  -- discount applied directly
+  order_date,
+  current_timestamp() as created_at
+from raw.orders
+
+
