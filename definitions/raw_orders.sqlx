@@ -1,0 +1,8 @@
+-- definitions/orders_raw.sqlx
+config {
+  type: "declaration",   
+  schema: "raw",          
+  name: "orders_raw"
+}
+
+-- No SQL is required because Dataflow already loads the data

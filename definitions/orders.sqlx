@@ -1,0 +1,16 @@
+-- definitions/orders.sqlx
+config {
+  type: "incremental",
+  schema: "analytics",
+  name: "orders"
+}
+
+js {
+  const utils = require("includes/utils");
+
+  pre_operations = utils.auditStart("orders");
+  post_operations = utils.auditEnd("orders");
+}
+
+SELECT *
+FROM ${ref("orders_raw")}
