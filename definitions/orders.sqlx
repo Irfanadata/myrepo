@@ -2,7 +2,8 @@
 config {
   type: "incremental",
   schema: "analytics",
-  name: "orders"
+  name: "orders",
+  tags:["incremental"]
 }
 
 js {
