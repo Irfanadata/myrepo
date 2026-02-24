@@ -1,7 +1,0 @@
-config {
-  type: "operations"
-}
-
-delete from raw.orders
-where amount = 0;
-
