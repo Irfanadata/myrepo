@@ -1,4 +1,4 @@
-function auditStart(model) {
+function auditStart(model) { 
   return `
     INSERT INTO audit.dataform_audit_log
     VALUES ("${model}", "\${dataform.runId()}", "STARTED", CURRENT_TIMESTAMP(), NULL, NULL);
