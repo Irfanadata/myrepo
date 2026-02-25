@@ -1,3 +1,4 @@
 defaultProject: bilvantisaimlproject
 defaultDataset: dataform
+defaultLocation: US
 defaultAssertionDataset: dataform_assertions

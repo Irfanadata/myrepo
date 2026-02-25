@@ -1,4 +1,4 @@
--- definitions/orders.sqlx
+-- -- definitions/orders.sqlx
 config {
   type: "incremental",
   schema: "analytics",
@@ -22,3 +22,46 @@ js {
 
 SELECT *
 FROM ${ref("orders_raw")}
+
+
+-- definitions/orders.sqlx
+-- definitions/orders.sqlx
+-- definitions/orders.sqlx
+-- config {
+--   type: "incremental",
+--   schema: "dataform",
+--   name: "orders",
+--   tags: ["incremental"],
+
+--   preOps: [
+--     `
+--     INSERT INTO audit.dataform_audit_log
+--     VALUES ('orders', "${dataform.runId}", 'STARTED', CURRENT_TIMESTAMP(), NULL, NULL);
+--     `
+--   ]
+-- }
+
+-- SELECT *
+-- FROM ${ref("orders_raw")}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
