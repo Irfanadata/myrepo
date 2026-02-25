@@ -1,0 +1,6 @@
+{
+  "warehouse": "bigquery",
+  "defaultDatabase": "bilvantisaimlproject",
+  "defaultSchema": "analytics",
+  "assertionSchema": "dataform_assertions"
+}
