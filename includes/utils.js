@@ -5,12 +5,25 @@ function auditStart(model) {
   `;
 }
 
+// function auditEnd(model) {
+//   return `
+//     UPDATE audit.dataform_audit_log
+//     SET status="SUCCESS",
+//         end_time=CURRENT_TIMESTAMP(),
+//         row_count=(SELECT COUNT(*) FROM \${self()})
+//     WHERE model_name="${model}"
+//       AND run_id="\${dataform.runId()}";
+//   `;
+// }
+
 function auditEnd(model) {
   return `
     UPDATE audit.dataform_audit_log
     SET status="SUCCESS",
         end_time=CURRENT_TIMESTAMP(),
-        row_count=(SELECT COUNT(*) FROM \${self()})
+        row_count=(
+          SELECT IFNULL(COUNT(*),0) FROM \${self()}
+        )
     WHERE model_name="${model}"
       AND run_id="\${dataform.runId()}";
   `;

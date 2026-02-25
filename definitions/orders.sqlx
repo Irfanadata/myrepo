@@ -6,6 +6,13 @@ config {
   tags:["incremental"]
 }
 
+-- js {
+--   const utils = require("includes/utils");
+
+--   pre_operations = utils.auditStart("orders");
+--   post_operations = utils.auditEnd("orders");
+-- }
+
 js {
   const utils = require("includes/utils");
 
