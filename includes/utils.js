@@ -59,28 +59,29 @@
 // includes/utils.js
 // includes/utils.js
 // includes/utils.js
-function auditStart(model) {
+// includes/utils.js
+
+// includes/utils.js
+function auditStart(model, runId) {
   return `
 INSERT INTO audit.dataform_audit_log
-VALUES ('${model}', "${dataform.runId}", 'STARTED', CURRENT_TIMESTAMP(), NULL, NULL);
+(model_name, run_id, status, start_time, end_time, row_count)
+VALUES ('${model}', "${runId}", 'STARTED', CURRENT_TIMESTAMP(), NULL, NULL)
 `;
 }
 
-function auditEnd(model, targetTable) {
+function auditEnd(model, runId, tableNameSQL) {
   return `
 UPDATE audit.dataform_audit_log
 SET status='SUCCESS',
     end_time=CURRENT_TIMESTAMP(),
-    row_count=(SELECT IFNULL(COUNT(*),0) FROM ${ref(targetTable)})
-WHERE table_name='${model}'
-  AND run_id="${dataform.runId}";
+    row_count=(SELECT IFNULL(COUNT(*),0) FROM ${tableNameSQL})
+WHERE model_name='${model}'
+  AND run_id="${runId}"
 `;
 }
 
 module.exports = { auditStart, auditEnd };
-
-
-
 
 
 

@@ -47,21 +47,42 @@
 
 
 
+-- definitions/orders.sqlx
 
+-- definitions/orders.sqlx
 
+-- definitions/orders.sqlx
 
+-- definitions/orders.sqlx
 
+-- definitions/orders.sqlx
 
+-- definitions/orders.sqlx
+config {
+  type: "incremental",
+  schema: "analytics",
+  name: "orders",
+  uniqueKey: ["order_id"],
+  tags: ["incremental"]
+}
 
+js {
+  const utils = require("includes/utils");
 
+  pre_operations = [utils.auditStart("orders")];
 
+  // Pass ${self()} from SQLX to JS
+  post_operations = [utils.auditEnd("orders", "${self()}")];
+}
 
+SELECT *
+FROM ${ref("orders_raw")}
 
-
-
-
-
-
-
-
+${when(incremental(), `
+  WHERE order_date > (
+    SELECT IFNULL(MAX(DATE(start_time)), DATE("2000-01-01"))
+    FROM audit.dataform_audit_log
+    WHERE model_name = "orders"
+  )
+`)}
 
