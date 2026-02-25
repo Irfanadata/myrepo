@@ -1,49 +1,49 @@
+-- -- -- definitions/orders.sqlx
+-- -- config {
+-- --   type: "incremental",
+-- --   schema: "analytics",
+-- --   name: "orders",
+-- --   tags:["incremental"]
+-- -- }
+
+-- -- -- js {
+-- -- --   const utils = require("includes/utils");
+
+-- -- --   pre_operations = utils.auditStart("orders");
+-- -- --   post_operations = utils.auditEnd("orders");
+-- -- -- }
+
+-- -- js {
+-- --   const utils = require("includes/utils");
+
+-- --   pre_operations = utils.auditStart("orders");
+-- --   post_operations = utils.auditEnd("orders");
+-- -- }
+
+-- -- SELECT *
+-- -- FROM ${ref("orders_raw")}
+
+
 -- -- definitions/orders.sqlx
-config {
-  type: "incremental",
-  schema: "analytics",
-  name: "orders",
-  tags:["incremental"]
-}
+-- -- definitions/orders.sqlx
+-- -- definitions/orders.sqlx
+-- -- // definitions/orders.js
+-- const utils = require("includes/utils");
 
--- js {
---   const utils = require("includes/utils");
-
---   pre_operations = utils.auditStart("orders");
---   post_operations = utils.auditEnd("orders");
--- }
-
-js {
-  const utils = require("includes/utils");
-
-  pre_operations = utils.auditStart("orders");
-  post_operations = utils.auditEnd("orders");
-}
-
-SELECT *
-FROM ${ref("orders_raw")}
-
-
--- definitions/orders.sqlx
--- definitions/orders.sqlx
--- definitions/orders.sqlx
--- config {
+-- module.exports = {
 --   type: "incremental",
 --   schema: "dataform",
 --   name: "orders",
 --   tags: ["incremental"],
 
---   preOps: [
---     `
---     INSERT INTO audit.dataform_audit_log
---     VALUES ('orders', "${dataform.runId}", 'STARTED', CURRENT_TIMESTAMP(), NULL, NULL);
---     `
---   ]
--- }
+--   preOps: [utils.auditStart("orders")],
+--   postOps: [utils.auditEnd("orders")],
 
--- SELECT *
--- FROM ${ref("orders_raw")}
-
+--   query: `
+--     SELECT *
+--     FROM ${ref("orders_raw")}
+--   `
+-- };
 
 
 
